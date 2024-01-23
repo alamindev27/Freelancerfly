@@ -110,7 +110,7 @@
                                                     <div class="minimum-withdraw-info d-flex justify-content-between">
                                                         <div>
                                                             <p class="mb-0">NOTICE : Minimum withdraw amount:
-                                                                <span>$3</span>.</p>
+                                                                <span>$5</span>.</p>
                                                             <p class="mb-0">Your withdraw charge is <span>{{ $getway->charge }}</span>%.</p>
                                                         </div>
                                                         <div class="payment-logo">
@@ -127,7 +127,7 @@
                                                         <div class="payment-input-item">
                                                             <div class="ls-inputicon-box payment-input">
                                                                 <label>Amount</label><span class="text-danger">*</span>
-                                                                <input class="form-control amount_withdraw" onchange="changeValue{{ $getway->id }}(this)" id="amount_withdraw{{ $getway->id }}" name="amount" type="number" min="3" placeholder="Enter Your Amount" value="1" step="1" required>
+                                                                <input class="form-control amount_withdraw" onchange="changeValue{{ $getway->id }}(this)" id="amount_withdraw{{ $getway->id }}" name="amount" type="number" min="5" placeholder="Enter Your Amount" value="5" step="1" required>
                                                             </div>
                                                         </div>
                                                         <div class="payment-input-item">

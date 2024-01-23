@@ -34,54 +34,20 @@
                         <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: absolute; transform: translateY(695.219px); width: 525.984px; top: 0px;">
                             <div class="side-bar">
                                 <div class="sidebar-elements search-bx">
-                                    <form>
+                                    <form action="{{ route('user.filter.job') }}" method="GET">
                                         <div class="form-group mb-4">
                                             <h4 class="section-head-small mb-4">Category</h4>
-                                            <div class="dropdown bootstrap-select wt-select-bar-large filter_item"><select
-                                                    id="category" class="wt-select-bar-large selectpicker filter_item"
-                                                    data-live-search="true" data-bv-field="size">
+                                            <div class="dropdown bootstrap-select wt-select-bar-large filter_item">
+                                                <select id="category" name="category_id" class="wt-select-bar-large selectpicker filter_item" data-live-search="true" data-bv-field="size">
                                                     <option value="">All Category</option>
-                                                    <option value="100">Ads Click</option>
-                                                    <option value="101">Answers</option>
-                                                    <option value="103">Blog</option>
-                                                    <option value="104">Comment</option>
-                                                    <option value="105">Computer Programs</option>
-                                                    <option value="106">Discord</option>
-                                                    <option value="108">Facebook</option>
-                                                    <option value="109">Facebook-Invite</option>
-                                                    <option value="110">Gmail Account</option>
-                                                    <option value="112">Instagram</option>
-                                                    <option value="113">Kyc Submit</option>
-                                                    <option value="114">Linkedin</option>
-                                                    <option value="115">SEO, Promote Content, Search, Engage</option>
-                                                    <option value="116">Mobile Application</option>
-                                                    <option value="117">Others</option>
-                                                    <option value="118">Promotion</option>
-                                                    <option value="119">Reddit</option>
-                                                    <option value="120">Reel / Short</option>
-                                                    <option value="121">Refer Program</option>
-                                                    <option value="122">Review</option>
-                                                    <option value="123">Search / Click</option>
-                                                    <option value="124">Share</option>
-                                                    <option value="125">Sign Up</option>
-                                                    <option value="126">Story</option>
-                                                    <option value="127">Survey</option>
-                                                    <option value="128">Offer</option>
-                                                    <option value="129">Telegram</option>
-                                                    <option value="130">Tik-tok</option>
-                                                    <option value="131">Twitter</option>
-                                                    <option value="132">Typing</option>
-                                                    <option value="133">Views</option>
-                                                    <option value="134">Visitor</option>
-                                                    <option value="135">Website</option>
-                                                    <option value="137">YouTube / Toffe</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                                    @endforeach
                                                 </select>
 
                                                 <div class="dropdown-menu ">
                                                     <div class="bs-searchbox">
-                                                        <input type="search" class="form-control"
-                                                            autocomplete="off" role="combobox" aria-label="Search"
-                                                            aria-controls="bs-select-1" aria-autocomplete="list"></div>
+                                                        <input type="search" class="form-control" autocomplete="off" role="combobox" aria-label="Search" aria-controls="bs-select-1" aria-autocomplete="list"></div>
                                                     <div class="inner show" role="listbox" id="bs-select-1" tabindex="-1">
                                                         <ul class="dropdown-menu inner show" role="presentation"></ul>
                                                     </div>
@@ -92,7 +58,7 @@
                                         <div class="form-group mb-4 mobile_display_none">
                                             <h4 class="section-head-small mb-4">Keyword</h4>
                                             <div class="input-group">
-                                                <input id="keyword" type="text" class="form-control filter_item"
+                                                <input id="keyword" type="text" name="keyword" class="form-control filter_item"
                                                     value="" placeholder="Job Title or Keyword">
                                                 <button class="btn" type="button"><i
                                                         class="feather-search"></i></button>
@@ -104,15 +70,13 @@
                                             <ul>
                                                 <li>
                                                     <div class="form-check">
-                                                        <input type="radio" class="form-check-input filter_item"
-                                                            value="0" id="last_hour" name="date_post">
+                                                        <input type="radio" class="form-check-input filter_item" value="0" id="last_hour" name="date_post">
                                                         <label class="form-check-label" for="last_hour">Last hour</label>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="form-check">
-                                                        <input type="radio" class="form-check-input filter_item"
-                                                            value="1" id="1_day" name="date_post">
+                                                        <input type="radio" class="form-check-input filter_item" value="1" id="1_day" name="date_post">
                                                         <label class="form-check-label" for="1_day">Last 24
                                                             hours</label>
                                                     </div>
@@ -120,16 +84,14 @@
 
                                                 <li>
                                                     <div class="form-check">
-                                                        <input type="radio" class="form-check-input filter_item"
-                                                            value="7" id="7_day" name="date_post">
+                                                        <input type="radio" class="form-check-input filter_item" value="7" id="7_day" name="date_post">
                                                         <label class="form-check-label" for="7_day">Last 7 days</label>
                                                     </div>
                                                 </li>
 
                                                 <li>
                                                     <div class="form-check">
-                                                        <input type="radio" class="form-check-input filter_item"
-                                                            value="14" id="14_day" name="date_post">
+                                                        <input type="radio" class="form-check-input filter_item" value="14" id="14_day" name="date_post">
                                                         <label class="form-check-label" for="14_day">Last 14
                                                             days</label>
                                                     </div>
@@ -137,8 +99,7 @@
 
                                                 <li>
                                                     <div class="form-check">
-                                                        <input type="radio" class="form-check-input filter_item"
-                                                            value="30" id="30_day" name="date_post">
+                                                        <input type="radio" class="form-check-input filter_item" value="30" id="30_day" name="date_post">
                                                         <label class="form-check-label" for="30_day">Last 30
                                                             days</label>
                                                     </div>
@@ -146,13 +107,13 @@
 
                                                 <li>
                                                     <div class="form-check">
-                                                        <input type="radio" class="form-check-input filter_item"
-                                                            value="all" id="all_day" name="date_post">
+                                                        <input type="radio" class="form-check-input filter_item" value="all" id="all_day" name="date_post">
                                                         <label class="form-check-label" for="all_day">All</label>
                                                     </div>
                                                 </li>
 
                                             </ul>
+                                            <button class="site-button" type="submit">Filter</button>
                                         </div>
                                     </form>
 

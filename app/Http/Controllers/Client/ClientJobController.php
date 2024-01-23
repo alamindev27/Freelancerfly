@@ -70,7 +70,7 @@ class ClientJobController extends Controller
         $estimate_job_cost = $request->each_worker_earn*$request->total_worker_needed;
         $commision_amount = ($estimate_job_cost*1)/100;
         $proof_price = $request->proof_price;
-        $total_cost = $request->featured_price + $estimate_job_cost + $commision_amount + $proof_price + $request->rate;
+        $total_cost = $estimate_job_cost + $commision_amount + $proof_price;
 
         if (auth()->user()->main_balance < $total_cost) {
             return back()->with('error', 'You dont have enough main balance.');
@@ -90,7 +90,6 @@ class ClientJobController extends Controller
             'total_worker_needed' => $request->total_worker_needed,
             'total_cost' => $total_cost,
             'estimated_approval_day' => $request->estimated_approval_day,
-            'feature' => $request->feature,
             'steps' => json_encode($steps),
             'proofs' => json_encode($proofs),
             'proof_types' => json_encode($proof_types),

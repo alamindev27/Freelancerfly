@@ -4,6 +4,9 @@
         .all-dashboard-icon {
             width: 13px !important;
         }
+        .wallets-item {
+            flex-basis: 48% !important;
+        }
     </style>
 @endsection
 @section('content')
@@ -84,7 +87,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="wallets-item">
+                                        {{-- <div class="wallets-item">
                                             <div class="wallets-item-wrap-three">
                                                 <div class="deposit-balance">
                                                     <div class="deposit-balance-wrap d-flex flex-column align-items-center">
@@ -109,7 +112,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     {{-- <div class="product-filter-wrap d-flex justify-content-between align-items-center">
                                         <span class="woocommerce-result-count-left">Transaction History</span>

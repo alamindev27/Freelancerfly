@@ -164,6 +164,12 @@ Route::group(['middleware' => ['auth', 'is_blocked']], function(){
     Route::get('/dashboard', [BothHomeController::class, 'index'])->name('both.index');
     Route::get('/gig', [BothHomeController::class, 'gig'])->name('both.gig');
     Route::get('/gig/{id}/details', [BothHomeController::class, 'gigDetails'])->name('both.gig.details');
+    Route::post('/gig/order', [BothHomeController::class, 'order'])->name('both.gig.order');
+    Route::get('/gig/my-sale', [BothHomeController::class, 'saleList'])->name('user.gig.saleList');
+    Route::get('/gig/pending/sale-list', [BothHomeController::class, 'pendingSaleList'])->name('user.gig.pending.saleList');
+    Route::get('/gig/active/sale-list', [BothHomeController::class, 'activeSaleList'])->name('user.gig.active.saleList');
+    Route::get('/gig/completed/sale-list', [BothHomeController::class, 'completedSaleList'])->name('user.gig.completed.saleList');
+    Route::get('/gig/cancelled/sale-list', [BothHomeController::class, 'cancelledSaleList'])->name('user.gig.cancelled.saleList');
     Route::get('/edit-profile', [BothHomeController::class, 'editProfile'])->name('both.editProfile');
     Route::post('/update-profile', [BothHomeController::class, 'updateProfile'])->name('both.updateProfile');
     Route::get('/change-password', [BothHomeController::class, 'changePassword'])->name('both.changePassword');
@@ -182,8 +188,8 @@ Route::group(['middleware' => ['auth', 'is_blocked']], function(){
     Route::get('/wallets', [BoothWalletController::class, 'index'])->name('both.wallet.index');
     Route::get('/main-balance', [BoothWalletController::class, 'mainBalance'])->name('both.main.balance');
     Route::post('/deposit/{id}', [BoothWalletController::class, 'submitBalance'])->name('both.main.submit');
-    Route::get('/deposit-balance', [BoothWalletController::class, 'depositBalance'])->name('both.deposit.balance');
-    Route::post('/deposit-balance/store', [BoothWalletController::class, 'depositBalanceStore'])->name('both.deposit.balanceStore');
+    // Route::get('/deposit-balance', [BoothWalletController::class, 'depositBalance'])->name('both.deposit.balance');
+    // Route::post('/deposit-balance/store', [BoothWalletController::class, 'depositBalanceStore'])->name('both.deposit.balanceStore');
 
 
     Route::get('/earning-balance', [BoothWithdrawController::class, 'earningBalance'])->name('both.withdraw.balance');
@@ -198,6 +204,7 @@ Route::group(['middleware' => ['auth', 'is_blocked']], function(){
 Route::group(['prefix' => 'workers', 'middleware' => ['auth', 'is_user', 'is_blocked']], function(){
     Route::get('/group-jobs', [UserHomeController::class, 'groupJobs'])->name('user.groupJobs');
     Route::get('/job/{id}/details', [UserHomeController::class, 'jobDetails'])->name('user.job.details');
+    Route::get('/filter/', [UserHomeController::class, 'filterJob'])->name('user.filter.job');
     Route::post('/job/{id}/submit', [FrontendController::class, 'submitJob'])->name('user.job.submit');
     Route::get('/my-task', [UserHomeController::class, 'index'])->name('user.task.index');
 

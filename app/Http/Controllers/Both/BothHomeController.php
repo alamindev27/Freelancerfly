@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Both;
 use App\Http\Controllers\Controller;
 use App\Models\Gig;
 use App\Models\Message;
+use App\Models\Order;
 use App\Models\Skill;
 use App\Models\User;
 use Carbon\Carbon;
@@ -21,7 +22,6 @@ class BothHomeController extends Controller
         return view('both.edit-profile', compact('skills'));
     }
     public function updateProfile(Request $request){
-        // return $request->skill;
         $user = User::where('id', auth()->user()->id)->first();
         $request->validate([
             'name' => 'required | string | max:255',
@@ -93,6 +93,26 @@ class BothHomeController extends Controller
         $gigs = Gig::where('status', 'success')->orderBy('created_at', 'DESC')->get();
         return view('both.gig', compact('gigs'));
     }
+    public function saleList() {
+        $orders = Order::where('worker_id', auth()->user()->id)->get();
+        return view('user.gig.sale-list', compact('orders'));
+    }
+    public function pendingSaleList() {
+        $orders = Order::where([['worker_id', auth()->user()->id], ['status', 'pending']])->get();
+        return view('user.gig.sale-list', compact('orders'));
+    }
+    public function activeSaleList() {
+        $orders = Order::where([['worker_id', auth()->user()->id], ['status', 'active']])->get();
+        return view('user.gig.sale-list', compact('orders'));
+    }
+    public function completedSaleList() {
+        $orders = Order::where([['worker_id', auth()->user()->id], ['status', 'completed']])->get();
+        return view('user.gig.sale-list', compact('orders'));
+    }
+    public function cancelledSaleList() {
+        $orders = Order::where([['worker_id', auth()->user()->id], ['status', 'cancelled']])->get();
+        return view('user.gig.sale-list', compact('orders'));
+    }
 
 
     public function gigDetails($id) {
@@ -129,5 +149,28 @@ class BothHomeController extends Controller
         $messages = Message::where('sender_id', auth()->user()->id)->orWhere('resiver_id', auth()->user()->id)->get();
         $singleMessage = Message::where('id', $msgId)->first();
         return view('both.message-reply', compact('users', 'messages', 'singleMessage'));
+    }
+
+    public function order(Request $request) {
+        // return $request;
+        $request->validate([
+            'service_id' => 'required | numeric',
+            'price' => 'required | numeric',
+            'delivery_time' => 'required',
+        ]);
+        $user = User::where('id', auth()->user()->id)->first();
+        if ($request->price > auth()->user()->main_balance) {
+            return back()->with('error', 'Insufficient balance. Please add funds to your account and try again. Thank you');
+        }
+        $gig = Gig::where('id', $request->service_id)->first();
+        Order::insert([
+            'user_id' => auth()->user()->id,
+            'gig_id' => $request->service_id,
+            'worker_id' => $gig->user_id,
+            'package_name' => $request->package_name,
+            'price' => $request->price,
+            'delivery_time' => $request->delivery_time,
+        ]);
+        return back()->with('success', 'Order Successfully');
     }
 }

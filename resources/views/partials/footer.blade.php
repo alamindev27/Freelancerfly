@@ -1,4 +1,7 @@
 </div>
+
+
+
 <footer class="footer-dark" style="background-image: url({{ asset('assets/frontend/user/images/f-bg.jpg') }});">
     <div class="container">
 
@@ -31,7 +34,8 @@
                 <div class="col-lg-3 col-md-12">
                     <div class="widget widget_about">
                         <div class="logo-footer clearfix">
-                            <a href="index.html"><img src="{{ asset('assets/frontned/user/images/logo-footer-3.png') }}" alt=""></a>
+                            <a href="index.html"><img src="{{ asset('assets/frontned/user/images/logo-footer-3.png') }}"
+                                    alt=""></a>
                         </div>
                         <p>{{ setting()->footer_message }}</p>
                         <ul class="ftr-list">
@@ -96,7 +100,9 @@
         <div class="footer-bottom">
             <div class="footer-bottom-info">
                 <div class="footer-copy-right">
-                    <span class="copyrights-text">Copyright © {{ Carbon\Carbon::now()->format('Y') }} by <a href="{{ route('frontend.index') }}">{{ setting()->site_name }}</a> . All Rights Reserved</span>
+                    <span class="copyrights-text">Copyright © {{ Carbon\Carbon::now()->format('Y') }} by <a
+                            href="{{ route('frontend.index') }}">{{ setting()->site_name }}</a> . All Rights
+                        Reserved</span>
                 </div>
                 {{-- <ul class="social-icons">
                     <li><a href="#" target="blank"> <i class="fab fa-facebook-f"></i></a></li>
@@ -130,11 +136,10 @@
                         <div class="form-group mb-2">
                             <div class="ls-inputicon-box custom-i-box modal-comments">
                                 <label class="custom-title mb-2">Message <span class="text-danger">*</span></label>
-                                <textarea class="form-control" name="message" rows="4" placeholder="Type Message"
-                                    required></textarea>
-                                    @error('message')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                <textarea class="form-control" name="message" rows="4" placeholder="Type Message" required></textarea>
+                                @error('message')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="btn-submit-final mt-4 text-center">
@@ -148,6 +153,72 @@
             </form>
         </div>
 
+    </div>
+</div>
+
+
+
+<div class="modal fade final-price-modal" id="final-price" aria-hidden="true" aria-labelledby="sign_up_popupLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="{{ route('both.gig.order') }}" method="POST">
+                @csrf
+                 <div class="project-rate-wrap two d-flex align-items-center justify-content-center my-3 flex-wrap"
+                    id="project-rate-wrap">
+                    {{-- <div class="project-size-wrap d-flex justify-content-center main-check-wrapper custom-2">
+                        <div class="form-check me-2 mt-1 d-flex justify-content-start main-check-two">
+                            <input name="order_type" class="form-check-input mt-1 me-2" type="radio" value="0"
+                                id="flexCheckDefault-4" checked>
+                            <label class="form-check-label" for="flexCheckDefault-4">
+                                Defualt Order
+                            </label>
+                        </div>
+                        <div class="form-check me-2 mt-1 d-flex justify-content-start main-check-two">
+                            <input name="order_type" class="form-check-input mt-1 me-2" type="radio"
+                                value="1" id="flexCheckDefault-1">
+                            <label class="form-check-label" for="flexCheckDefault-1">
+                                Custom Order
+                            </label>
+                        </div>
+                    </div> --}}
+                    <div class="from-hour three me-4 mb-2 ps-0 defualt-order-price">
+                        <div class="order-info">
+                            <div class="order-info-item">
+                                <h6>Package Name:<span id="modal_package_name"></span></h6>
+                            </div>
+                            <div class="order-info-item">
+                                <h6>Package Price:<span id="modal_package_price"></span></h6>
+                            </div>
+                            <div class="order-info-item">
+                                <h6>Delivery Time:<span id="modal_delivery_date"></span></h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="from-hour three me-4 mb-2 ps-0 custom-order-price" style="display: none">
+                        <label class="mb-2 final-csutom">Final Budget (USD)</label>
+                        <div class="ls-inputicon-box rate-count d-flex align-items-center custom-2">
+                            <input class="form-control" name="custom_price" type="number" value="20">
+                            <i class="fs-input-icon fa-solid fa-sack-dollar"></i>
+                        </div>
+                    </div> --}}
+
+                    <p class="project-range-d text-center custom-2">Choose Order Method</p>
+                    <input type="hidden" name="price">
+                    <input type="hidden" name="delivery_time">
+                    <input type="hidden" name="service_id" value="">
+                    <input type="hidden" name="package_name" value="">
+                    {{-- <input type="hidden" name="package_type"> --}}
+
+                    <div class="btn-submit-final custom-2">
+                        <button type="submit" class="approve-final-btn">
+                            <i class="feather-briefcase me-2"></i> Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

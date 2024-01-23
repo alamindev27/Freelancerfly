@@ -28,7 +28,7 @@ class BoothWalletController extends Controller
         $request->validate([
             'sender_number' => 'required | string | max:255',
             'trxid' => 'required | string | max:255',
-            'amount' => 'required | numeric | min:1',
+            'amount' => 'required | numeric | min:5',
             'bdt_amount' => 'required | numeric | min:1'
         ]);
         $getwayId = Crypt::decrypt($id);

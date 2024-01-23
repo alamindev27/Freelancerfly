@@ -25,7 +25,6 @@ return new class extends Migration
             $table->float('each_worker_earn');
             $table->integer('total_worker_needed');
             $table->integer('estimated_approval_day');
-            $table->integer('feature');
             $table->longText('steps');
             $table->longText('proofs');
             $table->longText('proof_types');

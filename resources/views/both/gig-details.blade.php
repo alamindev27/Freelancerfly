@@ -74,10 +74,10 @@
                                                         </ul>
                                                     </div>
                                                     <div class="gig-pay-btn">
-                                                        <input type="hidden" id="package_price" value="80">
+                                                        <input type="hidden" id="package_price" value="{{ $gig->basic_price }}">
                                                         <input type="hidden" id="package_name" value="Basic">
                                                         <input type="hidden" id="package_type" value="0">
-                                                        <input type="hidden" id="delivery_day" value="30">
+                                                        <input type="hidden" id="delivery_day" value="{{ $gig->basic_delivery_time }}">
 
                                                         <a role="button" class="d-block continue-btn order-now-btn">Order Now <span><i class="feather-arrow-right"></i></span></a>
 
@@ -127,10 +127,10 @@
                                                         </ul>
                                                     </div>
                                                     <div class="gig-pay-btn">
-                                                        <input type="hidden" id="package_price" value="90">
+                                                        <input type="hidden" id="package_price" value="{{ $gig->standard_price }}">
                                                         <input type="hidden" id="package_name" value="Standard">
                                                         <input type="hidden" id="package_type" value="1">
-                                                        <input type="hidden" id="delivery_day" value="30">
+                                                        <input type="hidden" id="delivery_day" value="{{ $gig->standard_delivery_time }}">
 
                                                         <a role="button" class="d-block continue-btn order-now-btn">Order Now <span><i class="feather-arrow-right"></i></span></a>
                                                         <div class="service_user_info row">
@@ -176,14 +176,13 @@
                                                         </ul>
                                                     </div>
                                                     <div class="gig-pay-btn">
-                                                        <input type="hidden" id="package_price" value="100">
+                                                        <input type="hidden" id="package_price" value="{{ $gig->premium_price }}">
                                                         <input type="hidden" id="package_name" value="Premium">
                                                         <input type="hidden" id="package_type" value="2">
-                                                        <input type="hidden" id="delivery_day" value="30">
+                                                        <input type="hidden" id="delivery_day" value="{{ $gig->premium_delivery_time }}">
 
 
-                                                        <a role="button" class="d-block continue-btn order-now-btn">Order
-                                                            Now <span><i class="feather-arrow-right"></i></span></a>
+                                                        <a role="button" class="d-block continue-btn order-now-btn">Order Now <span><i class="feather-arrow-right"></i></span></a>
 
                                                         <div class="service_user_info row">
                                                             <div class="col-md-6">
@@ -258,7 +257,7 @@
                                     </div>
 
 
-                                    <h4 class="section-head-small mb-3">Reviews</h4>
+                                    {{-- <h4 class="section-head-small mb-3">Reviews</h4>
                                     <div class="row justify-content-center customer-rating">
                                         <div class=" col-12 mb-5">
 
@@ -756,7 +755,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="widget tw-sidebar-tags-wrap">
                                         <h4 class="section-head-small mb-4">Related Tags</h4>
                                         <div class="tagcloud">
@@ -849,6 +848,8 @@
             $('[name="price"]').val(price);
             $('[name="delivery_time"]').val(day);
             $('[name="package_type"]').val(package_type);
+            $('[name="service_id"]').val({{ $gig->id }});
+            $('[name="package_name"]').val(package_name);
 
             $('#final-price').modal('show');
         })

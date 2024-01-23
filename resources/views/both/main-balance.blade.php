@@ -29,8 +29,7 @@
                                                 <h5 class="mb-3">Add Fund in Main Balanace</h5>
                                                 <div class="earning-btn-item">
                                                     <div class="add-balance-deposit two">
-                                                        <a href="javascript:void(0)" id="add-fund-main">Add
-                                                            Fund</a>
+                                                        <a href="javascript:void(0)" id="add-fund-main">Add Fund</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -82,33 +81,21 @@
                                                             <div class="payment-input-wrapper">
                                                                 <div class="row">
                                                                     <div class="col-md-12">
-                                                                        <label
-                                                                            style="font-size: 12px;margin-bottom: 3px;font-weight: 500;">Send
-                                                                            Money </label><span class="text-danger">*</span>
-                                                                        <input class="form-control" name="send money"
-                                                                            type="text" required
-                                                                            value="{{ $getway->account_number }}" readonly>
+                                                                        <label style="font-size: 12px;margin-bottom: 3px;font-weight: 500;">Send Money </label><span class="text-danger">*</span>
+                                                                        <input class="form-control" name="send money" type="text" required value="{{ $getway->account_number }}" readonly>
                                                                     </div>
                                                                 </div>
-                                                                <div
-                                                                    class="payment-input-item d-flex justify-content-between">
-
+                                                                <div class="payment-input-item d-flex justify-content-between">
                                                                     <div class="ls-inputicon-box payment-input two">
                                                                         <div class="ls-inputicon-box payment-input">
-                                                                            <label>Sender Number </label><span
-                                                                                class="text-danger">*</span>
-                                                                            <input class="form-control" name="sender_number"
-                                                                                type="text" required
-                                                                                value="{{ old('sender_number') }}">
+                                                                            <label>Sender Number </label><span class="text-danger">*</span>
+                                                                            <input class="form-control" name="sender_number" type="text" required value="{{ old('sender_number') }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="ls-inputicon-box payment-input two">
                                                                         <div class="ls-inputicon-box payment-input">
-                                                                            <label>TrxId </label><span
-                                                                                class="text-danger">*</span>
-                                                                            <input class="form-control" name="trxid"
-                                                                                type="text" required
-                                                                                value="{{ old('trxid') }}">
+                                                                            <label>TrxId </label><span class="text-danger">*</span>
+                                                                            <input class="form-control" name="trxid" type="text" required value="{{ old('trxid') }}">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -116,12 +103,8 @@
                                                                     class="payment-input-item d-flex justify-content-between">
                                                                     <div class="ls-inputicon-box payment-input two">
                                                                         <div class="ls-inputicon-box payment-input">
-                                                                            <label>Amount</label><span
-                                                                                class="text-danger">*</span>
-                                                                            <input class="form-control amou" name="amount"
-                                                                                min="1" type="number"
-                                                                                placeholder="Enter Your Amount" required
-                                                                                value="0">
+                                                                            <label>Amount</label><span class="text-danger">*</span>
+                                                                            <input class="form-control amou" name="amount" min="5" type="number" placeholder="Enter Your Amount" required value="0">
                                                                             <input type="hidden" class="bdt_get_amount"
                                                                                 value="100.00">
                                                                         </div>

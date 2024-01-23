@@ -21,9 +21,12 @@ class BoothWithdrawController extends Controller
             'amount' => 'required | numeric | min:1'
         ]);
         $user = User::where('id', auth()->user()->id)->first();
-        $user->decrement('earning_balance', $request->amount);
-        $user->increment('main_balance', $request->amount);
-        return redirect()->route('user.wallet.index')->with('success', 'Transfer Successfully');
+        if ($request->amount > $user->main_balance) {
+            return back()->with('error', 'You dont have enough balance');
+        }
+        $user->decrement('main_balance', $request->amount);
+        $user->increment('earning_balance', $request->amount);
+        return redirect()->route('both.wallet.index')->with('success', 'Transfer Successfully');
     }
 
     public function withdraw(Request $request, $id) {
@@ -31,6 +34,9 @@ class BoothWithdrawController extends Controller
             'account_number' => 'required | string | max:255',
             'amount' => 'required | numeric | min:3',
         ]);
+        if (auth()->user()->earning_balance < $request->amount) {
+            return back()->with('error', 'Your dont have enough balance');
+        }
         $getway = PaymentGetway::where('id', $id)->first();
         Withdraw::insert([
             'user_id' => auth()->user()->id,
@@ -53,6 +59,6 @@ class BoothWithdrawController extends Controller
             'payment_method' => $getway->account_name,
             'created_at' => Carbon::now()
         ]);
-        return redirect()->route('user.wallet.index')->with('success', 'Submited Successfully');
+        return redirect()->route('both.wallet.index')->with('success', 'Submited Successfully');
     }
 }
