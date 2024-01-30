@@ -39,6 +39,7 @@
                             <th class="text-nowrap">User</th>
                             <th class="text-nowrap">TRX ID</th>
                             <th class="text-nowrap">Payment Getway</th>
+                            <th class="text-nowrap">Number</th>
                             <th class="text-nowrap">Amount</th>
                             <th class="text-nowrap">BDT Amount</th>
                             <th class="text-nowrap">Date</th>
@@ -68,6 +69,7 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <td class="align-middle text-nowrap">${{ $data->sender_number }}</td>
                                     <td class="align-middle text-nowrap">${{ $data->amount }}</td>
                                     <td class="align-middle text-nowrap">{{ $data->bdt_amount }}BDT</td>
                                     <td class="align-middle text-nowrap">{{ Carbon\Carbon::parse($data->created_at)->format('d/m/Y') }}</td>

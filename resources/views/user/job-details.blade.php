@@ -130,7 +130,7 @@
                                         <div class="client-location d-flex align-items-center mb-2">
                                             <h4 class="me-2">Excluded countries:</h4>
                                             <h3>
-                                                {{ $job->estimated_approval_day }}
+                                                {{ $job->country_name }}
                                             </h3>
                                         </div>
                                         <div class="client-location d-flex align-items-center mb-2">

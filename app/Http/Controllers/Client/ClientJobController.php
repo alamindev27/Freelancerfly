@@ -44,7 +44,6 @@ class ClientJobController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'category_id' => 'required',
             'region_id' => 'required',
@@ -79,9 +78,9 @@ class ClientJobController extends Controller
         $jobId = Job::insertGetId([
             'user_id' => auth()->user()->id,
             'category_id' => $request->category_id,
-            'subcategory_id' => $request->subcategory_id,
+            'subcategory_id' => implode(" ", $request->subcategory_id),
             'region_id' => $request->region_id,
-            'country_id' => 1,
+            'country_name' => $request->country_name,
             'title' => $request->title,
             'thumbnail' => $path.$fileName,
             'description' => $request->description,

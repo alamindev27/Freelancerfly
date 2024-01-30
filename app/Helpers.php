@@ -4,6 +4,9 @@ use App\Models\Advertisement;
 use App\Models\BasicFeature;
 use App\Models\GigBanner;
 use App\Models\Job;
+use App\Models\JobSubmitProof;
+use App\Models\JobSubmitProofImage;
+use App\Models\Message;
 use App\Models\PremiumFeature;
 use App\Models\Prove;
 use App\Models\Setting;
@@ -136,12 +139,45 @@ if (!function_exists('getProve')) {
         }
     }
 }
-if (!function_exists('getUser')) {
-    function getUser($id)
+if (!function_exists('lastMessage')) {
+    function lastMessage($id)
     {
-        $user = User::where('id', $id)->first();
-        if ($user) {
-            return $user;
+        $lastMessage = Message::where('group_id', $id)->latest()->first();
+        if ($lastMessage) {
+            return $lastMessage;
+        }else{
+            return false;
+        }
+    }
+}
+if (!function_exists('proves')) {
+    function proves($id)
+    {
+        $proves = Prove::where('job_id', $id)->get();
+        if ($proves) {
+            return $proves;
+        }else{
+            return false;
+        }
+    }
+}
+if (!function_exists('getAnswer')) {
+    function getAnswer($id)
+    {
+        $getAnswer = JobSubmitProof::where('submit_job_id', $id)->get();
+        if ($getAnswer) {
+            return $getAnswer;
+        }else{
+            return false;
+        }
+    }
+}
+if (!function_exists('getAnswer2')) {
+    function getAnswer2($id)
+    {
+        $getAnswer2 = JobSubmitProofImage::where('submit_job_id', $id)->get();
+        if ($getAnswer2) {
+            return $getAnswer2;
         }else{
             return false;
         }

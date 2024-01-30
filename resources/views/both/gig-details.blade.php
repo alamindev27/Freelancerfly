@@ -786,9 +786,9 @@
 
 
     <script>
-        function send_message(sender_id, resiver_id) {
+        function send_message(sender_id, reciver_id) {
             $('#sender_id').val(sender_id);
-            $('#resiver_id').val(resiver_id);
+            $('#reciver_id').val(reciver_id);
             $('#send_message').modal('show');
         }
 

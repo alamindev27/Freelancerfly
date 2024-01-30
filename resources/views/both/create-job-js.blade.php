@@ -245,6 +245,7 @@
 
         $(document).on('change', '.country_input', function(evt) {
             var checkedBoxes = $('.country_input:checked');
+            console.log(checkedBoxes);
             var country_name = '';
             if (checkedBoxes.length > 4) {
                 $(this).prop('checked', false);
@@ -415,18 +416,22 @@
 
     function summery() {
         var checkedCountries = [];
-        var allCountryId = [];
         $('.country_input:checked').each(function() {
             checkedCountries.push($(this).attr('country_name'));
-            allCountryId.push($(this).attr('value'));
         });
-        var excludedCountries = checkedCountries.join(', ');
+        var excludedCountries = checkedCountries.join(',');
+        console.log(excludedCountries);
         if (excludedCountries == '') {
             $('#exclude_summery').text("N/A");
-            $('#allCountryId').val("");
         } else {
             $('#exclude_summery').text(excludedCountries);
-            $('#allCountryId').val(allCountryId);
+            $('#country_name').val(excludedCountries);
+
+
+
+
+
+
         }
 
         var category = $('input[name="category_id"]:checked').attr('category_name');

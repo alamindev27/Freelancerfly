@@ -132,7 +132,7 @@
                 <div class="row">
                     <div class="col-12">
                         <input type="hidden" name="sender_id" id="sender_id">
-                        <input type="hidden" name="resiver_id" id="resiver_id">
+                        <input type="hidden" name="reciver_id" id="reciver_id">
                         <div class="form-group mb-2">
                             <div class="ls-inputicon-box custom-i-box modal-comments">
                                 <label class="custom-title mb-2">Message <span class="text-danger">*</span></label>

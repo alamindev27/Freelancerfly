@@ -12,6 +12,7 @@ class Job extends Model
         'user_id',
         'category_id',
         'subcategory_id',
+        'country_name',
         'title',
         'thumbnail',
         'description',

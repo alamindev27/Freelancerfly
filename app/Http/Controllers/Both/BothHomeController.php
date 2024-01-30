@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Both;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gig;
+use App\Models\GroupMessage;
 use App\Models\Message;
 use App\Models\Order;
 use App\Models\Skill;
@@ -123,32 +124,56 @@ class BothHomeController extends Controller
     public function sendMessage(Request $request) {
         $request->validate([
             'sender_id' => 'required | numeric',
-            'resiver_id' => 'required | numeric',
+            'reciver_id' => 'required | numeric',
             'message' => 'required | string | max:255'
         ]);
 
-        Message::insert([
-            'sender_id' => $request->sender_id,
-            'resiver_id' => $request->resiver_id,
-            'message' => $request->message,
-            'created_at' => Carbon::now()
-        ]);
+        $grupMessageExists = GroupMessage::where([['sender_id', $request->sender_id], ['reciver_id', $request->reciver_id]])->exists();
+
+
+        if (!$grupMessageExists) {
+            $gId = GroupMessage::insertGetId([
+                'sender_id' => $request->sender_id,
+                'reciver_id' => $request->reciver_id,
+                'created_at' => Carbon::now()
+            ]);
+
+            Message::insert([
+                'group_id' => $gId,
+                'sender_id' => $request->sender_id,
+                'reciver_id' => $request->reciver_id,
+                'message' => $request->message,
+                'created_at' => Carbon::now()
+            ]);
+        }else{
+            $gme = GroupMessage::where([['sender_id', $request->sender_id], ['reciver_id', $request->reciver_id]])->first();
+            Message::insert([
+                'group_id' => $gme->id,
+                'sender_id' => $request->sender_id,
+                'reciver_id' => $request->reciver_id,
+                'message' => $request->message,
+                'created_at' => Carbon::now()
+            ]);
+        }
+
         return back()->with('success', 'Message Sent Successfully');
     }
 
+
+
     public function readMessage() {
-        $users = Message::where('sender_id', auth()->user()->id)->orWhere('resiver_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get()->unique('resiver_id');
-        return view('both.message', compact('users'));
+        $inboxes = GroupMessage::where('sender_id', auth()->user()->id)->orWhere('reciver_id', auth()->user()->id)->latest()->get();
+        return view('both.message', compact('inboxes'));
     }
 
 
 
 
     public function replyMessage($msgId) {
-        $users = Message::where('sender_id', auth()->user()->id)->orWhere('resiver_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get()->unique('resiver_id');
-        $messages = Message::where('sender_id', auth()->user()->id)->orWhere('resiver_id', auth()->user()->id)->get();
-        $singleMessage = Message::where('id', $msgId)->first();
-        return view('both.message-reply', compact('users', 'messages', 'singleMessage'));
+        $inboxes = GroupMessage::where('sender_id', auth()->user()->id)->orWhere('reciver_id', auth()->user()->id)->latest()->get();
+        $messages = Message::where('group_id', $msgId)->get();
+        $singleMessage = Message::where('group_id', $msgId)->latest()->first();
+        return view('both.message-reply', compact('inboxes', 'messages', 'singleMessage'));
     }
 
     public function order(Request $request) {

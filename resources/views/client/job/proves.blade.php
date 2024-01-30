@@ -33,14 +33,17 @@
                                             <div class="custom-transaction-table">
                                                 <div class="transaction-header justify-content-between align-items-center">
                                                     <div class="transaction-header-item five text-center">
-                                                        <span>Proof ID</span>
+                                                        <span>Date</span>
                                                     </div>
                                                     <div class="transaction-header-item five text-center">
-                                                        <span>Proof</span>
+                                                        <span>Action</span>
                                                     </div>
-                                                    {{-- <div class="transaction-header-item five">
-                                                        <span>Cost</span>
+
+
+                                                    <div class="transaction-header-item five">
+                                                        <span>Note</span>
                                                     </div>
+                                                    {{--
                                                     <div class="transaction-header-item five">
                                                         <span>Completed By</span>
                                                     </div>
@@ -55,21 +58,31 @@
                                                     @foreach ($proves as $proof)
                                                         <div class="transaction-body d-flex justify-content-between align-items-center flex-wrap">
                                                             <div class="transaction-b-item five add-main-b add-fund-history">
-                                                                @if ($proof->status == 'pending')
-                                                                    <a href="{{ route('client.approved.jobSubmit', $proof->id) }}" class="btn btn-success btn-sm">Satisfied</a>
-                                                                @else
-                                                                    <a href="javascript:viod(0)" class="btn btn-primary btn-sm disabled">Satisfied</a>
-                                                                @endif
+                                                                {{ Carbon\Carbon::parse($proof->created_at)->format('Y-m-d g:i:s') }}
+
+                                                            </div>
+
+
+
+                                                            <div class="transaction-b-item five add-main-b add-fund-history">
+                                                                <span class="d-flex align-items-center flex-wrap justify-content-start justify-content-md-center"><span class="table-id d-md-none">Date</span>
+                                                                    @if ($proof->status == 'pending')
+                                                                        <a href="{{ route('client.approved.jobSubmit', $proof->id) }}" class="btn btn-success btn-sm">Satisfied</a>
+                                                                    @else
+                                                                        <a href="javascript:viod(0)" class="btn btn-primary btn-sm disabled">Satisfied</a>
+                                                                    @endif
+
+                                                                    <button type="button" role="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{ $loop->index }}" class="btn btn-sm btn-info mx-2">Show</button>
+                                                                </span>
                                                             </div>
 
                                                             <div class="transaction-b-item five add-main-b add-fund-history">
-                                                                <span class="d-flex align-items-center flex-wrap justify-content-start justify-content-md-center"><span class="table-id d-md-none">Proof</span>
-                                                                    {{ Carbon\Carbon::parse($proof->created_at)->format('Y-m-d g:i:s') }}
+                                                                <span class=" d-flex align-items-center flex-wrap justify-content-start justify-content-md-center">
+                                                                    <span class="table-id d-md-none">Note</span>
+                                                                    {{ $proof->note }}
                                                                 </span>
                                                             </div>
-                                                            {{--<div class="transaction-b-item five add-main-b add-fund-history">
-                                                                <span class=" d-flex align-items-center flex-wrap justify-content-start justify-content-md-center"><span class="table-id d-md-none">Cost</span>$ {{ $job->total_cost }}</span>
-                                                            </div>
+                                                            {{--
                                                             <div class="transaction-b-item five add-main-b add-fund-history">
                                                                 <span class=" d-flex align-items-end flex-wrap justify-content-start justify-content-md-end"><span class="table-id d-md-none">Add Amount</span> <span class="text-success p-1">{{ submitedJob($job->id) > 0 ? submitedJob($job->id) : 0 }}/{{ $job->total_worker_needed }}</span></span>
                                                             </div>
@@ -81,6 +94,37 @@
                                                                 <a href="{{ route('client.job.proves', Crypt::encrypt($job->id)) }}" class="d-inline btn btn-sm btn-info text-decoration-none">Proves</a>
                                                             </div> --}}
                                                         </div>
+
+                                                        <div class="modal fade" id="exampleModalCenter{{ $loop->index }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter{{ $loop->index }}Title" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                              <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                  <h5 class="modal-title" id="exampleModalLongTitle">Show files</h5>
+                                                                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                  </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    @foreach (proves($proof->job_id) as $key2 => $getprove)
+                                                                        @if ($getprove->proof_type == 0)
+                                                                            <p class="fw-bold">{{ ++$key2 }}. {{ $getprove->proof }}</p>
+                                                                            @foreach (getAnswer($proof->id) as $answer)
+                                                                                <p>{{ $answer->proof }}</p>
+                                                                            @endforeach
+                                                                        @else
+                                                                            <p class="fw-bold">{{ ++$key2 }}. {{ $getprove->proof }}</p>
+                                                                            @foreach (getAnswer2($proof->id) as $answer2)
+                                                                                <img src="{{ asset($answer2->image) }}" style="width: 60px; height:60px" alt="" class="border bounded p-2 mx-2">
+                                                                            @endforeach
+                                                                        @endif
+                                                                    @endforeach
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
                                                     @endforeach
                                                 </div>
                                             </div>

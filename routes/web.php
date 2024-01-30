@@ -209,8 +209,6 @@ Route::group(['prefix' => 'workers', 'middleware' => ['auth', 'is_user', 'is_blo
     Route::get('/my-task', [UserHomeController::class, 'index'])->name('user.task.index');
 
 
-
-
     Route::get('/profile/verify', [UserHomeController::class, 'verify'])->name('user.verify.profile');
     Route::post('/profile/verify', [UserHomeController::class, 'verifySubmit'])->name('user.profile.verify.submit');
     Route::get('/plan', [UserPlanController::class, 'index'])->name('user.plan.index');
@@ -222,7 +220,6 @@ Route::group(['prefix' => 'workers', 'middleware' => ['auth', 'is_user', 'is_blo
     Route::get('/gig/{id}/details', [UserGigController::class, 'gigDetails'])->name('user.gig.details');
 
 });
-
 
 
 Route::group(['prefix' => 'buyer', 'middleware' => ['auth', 'is_client', 'is_blocked']], function(){

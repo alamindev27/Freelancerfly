@@ -374,10 +374,11 @@
 
                                                                                 </div>
 
+                                                                                <input type="hidden" value="" id="country_name" name="country_name">
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="button" name="next" class="next action-button custom-btn-step" value="Apply and go to next" />
+                                                                    <input type="button" name="next" class="next action-button custom-btn-step" value="Apply and go to next"/>
                                                                 </fieldset>
 
                                                                 <fieldset class="msform-fieldset" style="display: none;">
@@ -785,9 +786,9 @@
                                                                 <div class="zone">
                                                                     <h6>Zone: <span id="side_zone"></span></h6>
                                                                 </div>
-                                                                {{-- <div class="excluded-wrap">
+                                                                <div class="excluded-wrap">
                                                                     <h6>Excluded: <span id="exclude_summery">N/A</span></h6>
-                                                                </div> --}}
+                                                                </div>
                                                             </div>
                                                         <div class="content-box-item">
                                                             <div class="category-job-post">

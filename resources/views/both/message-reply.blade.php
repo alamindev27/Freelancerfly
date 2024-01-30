@@ -103,41 +103,60 @@
 
 
                                             <div id="msg-chat-wrap" class="wt-dashboard-msg-box">
-                                                {{-- <div class="single-msg-user-name-box">
-                                                    <div class="single-msg-short-discription">
-                                                        <h4 class="single-msg-user-name">
-                                                            @if ($user->resiver_id == auth()->user()->id)
-                                                                {{ getUser($user->sender_id)->name }}
-                                                                <p>{{ getUser($user->sender_id)->title }}</p>
-                                                            @else
-                                                                {{ getUser($user->resiver_id)->name }}
-                                                                <p>{{ getUser($user->resiver_id)->title }}</p>
-                                                            @endif
-                                                        </h4>
-                                                    </div>
-                                                </div> --}}
                                                 <div class="single-user-msg-conversation scrollbar-macosx "
                                                     id="msg-chat-list" style="overflow-x:scroll">
                                                     <div class="single-user-comment-wrap sigle-user-reply">
                                                         <div class="row justify-content-end">
                                                             <div class="col-12">
                                                                 @foreach ($messages as $message)
-                                                                    <div class="single-user-comment-block clearfix">
-                                                                        <div class="single-user-com-pic">
-                                                                            @if ($message->sender_id == auth()->user()->id)
-                                                                                <img src="{{ asset(getUser($message->resiver_id)->avatar) }}" alt="">
-                                                                            @else
-                                                                                <img src="{{ asset(getUser($message->sender_id)->avatar) }}" alt="">
-                                                                            @endif
-                                                                        </div>
-                                                                        <div class="single-user-com-text">{{ $message->message }}</div>
-                                                                        <div class="single-user-msg-time">
-                                                                            <svg style="width: 20px" class="svg-inline--fa fa-check text-wright" style="font-size: 10px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                                <path fill="currentColor" d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z">
-                                                                                </path>
-                                                                            </svg>
-                                                                        </div>
+                                                                <div class="single-user-comment-block clearfix">
+                                                                    <div class="single-user-com-pic">
+                                                                        <img src="{{ asset($message->id) }}" alt="">
+
                                                                     </div>
+                                                                    <div class="single-user-com-text">{{ $message->message }}</div>
+                                                                    {{-- <div class="single-user-msg-time">
+                                                                        <svg style="width: 20px" class="svg-inline--fa fa-check text-wright" style="font-size: 10px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                                            <path fill="currentColor" d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </div> --}}
+                                                                </div>
+                                                                    {{-- @if ($message->sender_id == auth()->user()->id)
+                                                                        <div class="single-user-comment-block clearfix">
+                                                                            <div class="single-user-com-pic">
+                                                                                @if ($message->sender_id == auth()->user()->id)
+                                                                                    <img src="{{ asset($message->messageWithUserRelation->avatar) }}" alt="">
+                                                                                @else
+                                                                                    <img src="{{ asset($message->messageWithUserRelation->avatar) }}" alt="">
+                                                                                @endif
+                                                                            </div>
+                                                                            <div class="single-user-com-text">{{ $message->message }}</div>
+                                                                            <div class="single-user-msg-time">
+                                                                                <svg style="width: 20px" class="svg-inline--fa fa-check text-wright" style="font-size: 10px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                                                    <path fill="currentColor" d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="single-user-comment-block clearfix">
+                                                                            <div class="single-user-com-pic">
+                                                                                @if ($message->sender_id == auth()->user()->id)
+                                                                                    <img src="{{ asset($message->messageWithUserRelation2->avatar) }}" alt="">
+                                                                                @else
+                                                                                    <img src="{{ asset($message->messageWithUserRelation2->avatar) }}" alt="">
+                                                                                @endif
+                                                                            </div>
+                                                                            <div class="single-user-com-text">{{ $message->message }}</div>
+                                                                            <div class="single-user-msg-time">
+                                                                                <svg style="width: 20px" class="svg-inline--fa fa-check text-wright" style="font-size: 10px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                                                    <path fill="currentColor" d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif --}}
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -158,8 +177,8 @@
                                                         <form action="{{ route('message.send') }}" id="conversation_form" method="post" class="w-100">
                                                             @csrf
                                                             <input class="publisher-input message" type="text" name="message" placeholder="Write something" style="width: 93%">
-                                                            <input type="text" name="sender_id" value="{{ auth()->user()->id }}">
-                                                            <input type="text" name="resiver_id" value="{{ $singleMessage->resiver_id }}">
+                                                            <input type="hidden" name="sender_id" value="{{ $singleMessage->sender_id }}">
+                                                            <input type="hidden" name="reciver_id" value="{{ $singleMessage->reciver_id }}">
                                                             <button type="submit" class="publisher-btn primary-btn-color" id="send_message" data-abc="true">
                                                                 <svg class="svg-inline--fa fa-paper-plane" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="paper-plane" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                                                     <path fill="currentColor"

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('subcategory_id');
             $table->unsignedBigInteger('region_id');
-            $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('category_id');
+            $table->string('subcategory_id');
+            $table->string('country_name');
             $table->string('title');
             $table->string('thumbnail');
             $table->longText('description')->nullable();
